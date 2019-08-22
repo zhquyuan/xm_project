@@ -1,0 +1,86 @@
+TebLocalPlannerROS:
+
+ odom_topic: odom
+ map_frame: /odom
+    
+ # Trajectory
+  
+ teb_autosize: True
+ dt_ref: 0.2
+#  机器人位姿控制频度，越大频度越高
+ allow_init_with_backwards_motion: false
+ dt_hysteresis: 0.1
+ global_plan_overwrite_orientation: True
+ max_global_plan_lookahead_dist: 3.0
+ feasibility_check_no_poses: 5
+    
+ # Robot
+         
+ max_vel_x: 0.4
+ max_vel_x_backwards: 0.2 #当向后移动时，机器人的最大绝对平移速度
+ max_vel_theta: 0.3
+ acc_lim_x: 0.5
+ acc_lim_theta: 0.5
+ min_turning_radius: 0.0
+ footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
+   type: "polygon" #多边形
+   vertices: [[0.11, -0.26], [0.11, 0.26], [-0.40, 0.26], [-0.40, -0.26]] # for type "polygon"
+  #  radius: 0.2 # for type "circular"
+  #  line_start: [-0.3, 0.0] # for type "line"
+  #  line_end: [0.3, 0.0] # for type "line"
+  #  front_offset: 0.2 # for type "two_circles"
+  #  front_radius: 0.2 # for type "two_circles"
+  #  rear_offset: 0.2 # for type "two_circles"
+  #  rear_radius: 0.2 # for type "two_circles"
+   
+ # GoalTolerance
+    
+ xy_goal_tolerance: 0.2
+ yaw_goal_tolerance: 0.1
+ free_goal_vel: False #去除目标速度的约束，让机器人可以以最大速度到达目标
+    
+ # Obstacles
+    
+ min_obstacle_dist: 0.1       #与障碍的最小期望距离，单位 meters###########
+ include_costmap_obstacles: True #指定应否考虑到局部costmap的障碍，被标记为障碍物的每个单元格被认为是点障碍物
+ costmap_obstacles_behind_robot_dist: 0.2
+ obstacle_poses_affected: 10  ###########################################
+ costmap_converter_plugin: ""
+ costmap_converter_spin_thread: True
+ costmap_converter_rate: 5
+
+ # Optimization
+    
+ no_inner_iterations: 5 #在每个外循环迭代中调用的实际求解器迭代次数
+ no_outer_iterations: 4
+ optimization_activate: True
+ optimization_verbose: False
+ penalty_epsilon: 0.1
+ weight_max_vel_x: 2 #满足最大允许平移速度的优化权重
+ weight_max_vel_theta: 1 #满足最大允许角速度的优化权重
+ weight_acc_lim_x: 1 #满足最大允许平移加速度的优化权重
+ weight_acc_lim_theta: 1 #满足最大允许角加速度的优化权重
+ #强制机器人仅选择正向（正的平移速度）的优化权重
+ weight_kinematics_forward_drive: 1
+ #用于满足 non-holonomic 运动学的优化权重（由于运动学方程构成等式约束，该参数必须很高）
+ weight_kinematics_nh: 1000 
+ weight_kinematics_turning_radius: 1 #采用最小转向半径的优化权重（仅适用于四驱驱动机器人）
+ weight_optimaltime: 1
+ weight_obstacle: 50 #保持与障碍物的最小距离的优化权重
+ weight_dynamic_obstacle: 10  # not in use yet
+ alternative_time_cost: False # not in use yet
+
+ # Homotopy Class Planner
+ #在不同的拓扑里激活并行规划（因为一次优化多个轨迹，所以需要占用更多的CPU资源）
+ enable_homotopy_class_planning: True
+ #激活多个线程，以便在不同的线程中规划每个轨迹
+ enable_multithreading: True
+ simple_exploration: False
+ max_number_classes: 4 #指定考虑到的不同轨迹的最大数量（限制计算量）
+ roadmap_graph_no_samples: 15  #指定为创建路线图而生成的样本数
+ roadmap_graph_area_width: 5   #指定该区域的宽度
+ h_signature_prescaler: 0.5    #缩放用于区分同伦类的内部参数（H-signature） 只能减小
+ h_signature_threshold: 0.1
+ obstacle_keypoint_offset: 0.1
+ obstacle_heading_threshold: 0.45
+ visualize_hc_graph: False #可视化创建的图形，用于探索不同的轨迹（在rviz中检查标记消息）

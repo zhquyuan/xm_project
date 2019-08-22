@@ -1,0 +1,10 @@
+<library path="lib/libdirectMove">
+  <class name="base_server/directMove"
+         type="base_server::directMove"
+         base_class_type="nodelet::Nodelet">
+    <description>
+     make xm just move likes you want
+    </description>
+  </class>
+</library>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+<node pkg="nodelet" type="nodelet" name="baseServer_manager" args="manager"/>
+<!--<node pkg="nodelet" type="nodelet" name="laserfollow" args="load base_server/laserfollow baseServer_manager" output="screen"/>-->
+<node pkg="nodelet" type="nodelet" name="ScanDeal" args="load xm_bringup/ScanDeal baseServer_manager" output="screen"/>
+<node pkg="nodelet" type="nodelet" name="directMove" args="load base_server/directMove baseServer_manager" output="screen"/>
+<!--<node pkg="nodelet" type="nodelet" name="alone_manager" args="manager"/>-->
+<node pkg="nodelet" type="nodelet" name="detectDoor" args="load base_server/detectDoor baseServer_manager" output="screen"/>
+<node pkg="nodelet" type="nodelet" name="detectObstacle" args="load base_server/detectObstacle baseServer_manager" output="screen"/>
+<!--<node pkg="nodelet" type="nodelet" name="hokuyo" args="load hokuyo_node/hokuyoScan baseServer_manager" output="screen"/>-->
+<node pkg="tf" type="static_transform_publisher" name="laser_broadcaster" args="0.20 0 0 0 0 0 base_link laser 50" />
+<!--<node name="xiaoyifu" pkg="base_server" type="xiaoyifu"/>-->
+</launch>

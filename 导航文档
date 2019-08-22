@@ -1,0 +1,17 @@
+建图：
+sudo chmod 777 /dev/ttyUSB0
+sudo chmod 777 /dev/ttyACM0
+roslaunch handsfree_hw handsfree_hw.launch
+roslaunch xm_bringup hokuyo.launch
+roslaunch xm_2dnav move_base_gmapping.launch
+roslaunch handsfree_hw keyboard_teleop.launch
+rviz
+rosrun map_server map_saver -f mymap
+
+导航：
+sudo chmod 777 /dev/ttyUSB0
+sudo chmod 777 /dev/ttyACM0
+roslaunch handsfree_hw handsfree_hw.launch
+roslaunch xm_bringup hokuyo.launch
+roslaunch xm_2dnav move_base_amcl_5cm.launch
+rviz

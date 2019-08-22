@@ -1,0 +1,50 @@
+﻿Ros controll trip:(from low to high)
+resource->hardware_interface->ros_controll_interfaces->controller_interfaces
+c++成员函数加const限定，不允许修改类成员变量，属于安全的函数
+我们的控制器都集成在stm32上，所以ros层的controller其实只是起到了数据更新的作用，但是我们可以想办法让控制器加入一些让xm更平滑的操作
+
+handsfree_hw接口：
+1.hardware_interface::BaseStateHandle ： 存储底盘数据（三个坐标，三个速度）
+2.class BaseStateInterface : public HardwareResourceManager<BaseStateHandle> {};
+controller 可以考虑用一下这个yujin_ocs，感觉对底盘比较好
+hardware还是用handsfree的
+机械臂
+动态设置：
+gen.add("name", type, level, "description", default, min, max)
+ros通信方式：
+	XML-RPC的全称是XML Remote Procedure Call，即XML（标准通用标记语言下的一个子集）远程过程调用。它是一套允许运行在不同操作系统、不同环境的程序实现基于Internet过程调用的规范和一系列的实现。这种远程过程调用使用http作为传输协议，XML作为传送信息的编码格式。Xml-Rpc的定义尽可能的保持了简单，但同时能够传送、处理、返回复杂的数据结构。
+复习期间代码更新计划：(1.2.3.4.9为主)
+//1.用上速度平滑，将仿真加到底盘控制器里,把原来经常用的move服务加到底盘控制器里
+2.加控制器（爪子，升降，Kinect舵机）
+//3.总之就是把代码的控制器进一步规范化，操作规范化，为上层规划提供一个规范的接口，这个任务要在6.18号以前完成。
+
+//5.（可选）如果moveit配置效果不行，就把xm_arm_server改了，继续拿来用
+moveit准备工作只剩下写爪子的控制器了
+
+
+9.写moveit代码
+
+
+
+
+ros层，角速度为正，底盘逆时针旋转，y方向向左为正方向，theta值逆时针增加。
+底盘速度限制：
+线速度：
+max_vel_x: 0.3 
+min_vel_x: 0.05
+角速度：
+max_vel_theta: 0.4 
+min_vel_theta: -0.4
+min_in_place_vel_theta: 0.2（原地旋转的角速度）
+加速度：
+acc_lim_x: 1.5
+acc_lim_y: 0.0 # zero for a differential drive robot
+acc_lim_theta: 1.5
+
+
+电子组任务：
+1.把底盘通信接口改好
+2.处理一下升降，让升降可以接受插值控制
+
+
+

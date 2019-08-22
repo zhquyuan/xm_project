@@ -1,0 +1,78 @@
+controller_frequency: 5.0  
+# 对地盘速度的控制频率
+#http://wiki.ros.org/base_local_planner
+recovery_behavior_enabled: false
+clearing_rotation_allowed: false
+
+TrajectoryPlannerROS:
+   max_vel_x: 0.3 
+   min_vel_x: 0.05
+  #  超前走时最大，最小的速度限制
+   max_vel_y: 0.0  # zero for a differential drive robot
+   min_vel_y: 0.0
+  #  差速轮而设为0
+   max_vel_theta: 0.4  
+   min_vel_theta: -0.4
+  #  最大最小角速度
+
+   min_in_place_vel_theta: 0.2
+
+   escape_vel: -0.1
+  #  逃逸速度，即遇到障碍物时回退的速度
+
+   ###################################################
+   acc_lim_x: 1.0 #############1.5
+   ####################################################
+
+   acc_lim_y: 0.0  # zero for a differential drive robot
+
+   #####################################################
+   acc_lim_theta: 1.0 ######################1.5
+   #####################################################
+  #  各个加速度的限制，不宜太大，否则车速难以控制，容易出现卡顿
+
+   holonomic_robot: false
+
+  ###################################################
+   yaw_goal_tolerance: 0.3 # about 6 degrees  0.3
+   ##################################################
+   xy_goal_tolerance: 0.3  # 5 cm
+  #  到达局部目标的容错范围
+
+   meter_scoring: true
+  #  使用米为单位进行计算
+
+   heading_lookahead: 0.325
+   heading_scoring: false
+   heading_scoring_timestep: 0.8
+
+   occdist_scale: 0.005 
+  #  详见pdf中的计算公式
+
+   oscillation_reset_dist: 0.05
+   publish_cost_grid_pc: false
+  
+   prune_plan: true
+   ####所走过的路径路径规划消失
+   
+   sim_time: 1.0 ###################1.0
+   sim_granularity: 0.025 ################0.05
+   angular_sim_granularity: 0.1
+
+   vx_samples: 15
+   vy_samples: 0  # zero for a differential drive robot
+   vtheta_samples: 20
+  #  对于x ，theta每秒钟的取样次数，太高易卡顿，太低不已按规划路径前进
+
+   dwa: false
+  #  加速度极差的机器人使用false
+   simple_attractor: false
+
+  #  pdist_scale: 1.5
+  #  gdist_scale: 0.4
+
+   pdist_scale: 2.0
+   gdist_scale: 0.4
+   occdist_scale: 0.05
+
+  #  详见rbx

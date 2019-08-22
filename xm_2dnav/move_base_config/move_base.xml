@@ -1,0 +1,19 @@
+<launch>
+
+  <node pkg="move_base" type="move_base" respawn="true" name="move_base" launch-prefix="xterm -e" clear_params="true">
+
+    <param name="footprint_padding" value="0.05" />
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>
+    <param name="controller_frequency" value="10.0" />
+    <rosparam file="$(find xm_2dnav)/move_base_config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find xm_2dnav)/move_base_config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find xm_2dnav)/move_base_config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find xm_2dnav)/move_base_config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find xm_2dnav)/move_base_config/teb_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find xm_2dnav)/move_base_config/costmap_conversion_params.yaml" command="load" />
+
+    <remap from="/cmd_vel" to="/mobile_base/mobile_base_controller/cmd_vel"/>
+    <remap from="/odom"    to="/mobile_base/mobile_base_controller/odom"/>
+  </node>
+ 
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+<node name="speech_server" pkg="xm_speech" type="xm_speech_server"/>
+<include file="$(find handsfree_hw)/launch/handsfree_hw.launch"/>
+<include file="$(find xm_bringup)/launch/hokuyo.launch"/>
+<include file="$(find xm_2dnav)/launch/move_base_amcl_5cm.launch"/>
+<node name="winter_test" pkg="xm_smach" type="winter_test.py"/>
+<node
+    name="rviz"
+    pkg="rviz"
+    type="rviz" />
+</launch>

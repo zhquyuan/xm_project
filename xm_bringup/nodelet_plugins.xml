@@ -1,0 +1,8 @@
+<library path="lib/libxm_bringup">
+  <class name="xm_bringup/ScanDeal" type="xm_bringup::ScanDeal" base_class_type="nodelet::Nodelet">
+  <description>
+  This is a nodelet to deal with data.
+  </description>
+  </class>
+</library>
+

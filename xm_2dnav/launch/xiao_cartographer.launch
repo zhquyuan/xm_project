@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find xm_2dnav)/move_base_config/move_base.xml"/>  
+  <!--<include file="$(find cartographer_ros)/launch/xiao_cartographer.launch"/>-->
+</launch>

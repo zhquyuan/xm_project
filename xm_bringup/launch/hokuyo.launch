@@ -1,0 +1,11 @@
+<launch>
+
+  <node pkg="nodelet" type="nodelet" name="standalone_nodelet"  args="manager" output="screen"/>
+  <node pkg="nodelet" type="nodelet" name="ScanNodelet" args="load xm_bringup/ScanDeal standalone_nodelet" output="screen">
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0.20 0 0 0 0 0 base_link laser 50" /> 
+  <!-- Run the Hokuyo laser scanner node -->
+  <node name="hokuyo" pkg="hokuyo_node" type="hokuyo_node"/>
+
+</launch>

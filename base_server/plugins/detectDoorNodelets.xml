@@ -1,0 +1,10 @@
+<library path="lib/libdetectDoor">
+  <class name="base_server/detectDoor"
+         type="base_server::detectDoor"
+         base_class_type="nodelet::Nodelet">
+    <description>
+     detect the door, know wheather does the door open
+    </description>
+  </class>
+</library>
+

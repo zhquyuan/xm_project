@@ -1,0 +1,2 @@
+以test开头的文件都是用于调试的
+speech_recognition.py是最终版

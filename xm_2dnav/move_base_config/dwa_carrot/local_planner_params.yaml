@@ -1,0 +1,58 @@
+DWAPlannerROS:
+
+ use_dwa: true
+ odom_topic: odom
+ map_frame: /odom
+
+#不要的参数值就注释，切记不能为空
+#Robot Configuration Parameters   
+ acc_lim_x: 5       #(double, default: 2.5)  m/s^2 速度和加速度上限过低可能使使机器人找不到路径
+ acc_lim_y: 0         #(double, default: 2.5)  m/s^2
+ acc_lim_th: 5      #(double, default: 3.2)  rad/s^2
+ max_trans_vel: 0.7    #(double, default: 0.55) m/s 
+ #min_trans_vel: -0.1   #(double, default: 0.1)  m/s
+ max_vel_x: 0.7       #(double, default: 0.55) m/s
+ min_vel_x: -0.1       #(double, default: 0.0)  m/s
+ max_vel_y: 0          #(double, default: 0.1)  m/s
+ min_vel_y: 0          #(double, default: -0.1) m/s
+ max_rot_vel: 2        #(double, default: 1.0)  rad/s
+ min_rot_vel: 0.2      #(double, default: 0.4)  rad/s
+ 
+#Goal Tolerance Parameters 
+ yaw_goal_tolerance: 0.2 #(double, default: 0.05) 
+ xy_goal_tolerance: 0.2  #(double, default: 0.10)
+# latch_xy_goal_tolerance:     #(bool, default: false)
+
+ #Forward Simulation Parameters
+ sim_time: 3         #(double, default: 1.7) seconds
+# sim_granularity:     #(double, default: 0.025) meters
+ 
+ #The number of samples to use when exploring the x velocity space
+ vx_samples: 20        #(integer, default: 3)
+ #The number of samples to use when exploring the y velocity space
+ vy_samples: 0         #(integer, default: 10) 
+ #The number of samples to use when exploring the theta velocity space
+ vth_samples: 30       #(integer, default: 20)
+# controller_frequency:        #(double, default: 20.0) 
+
+#Trajectory Scoring Parameters
+ #The weighting for how much the controller should stay close to the path it was given
+ #较大的值将使本地规划器更倾向于跟踪全局路径
+# path_distance_bias:          #(double, default: 32.0) 
+ #The weighting for how much the controller should attempt to reach its local goal, also controls speed
+ #机器人尝试到达目标点的权重。实验显示（网上的）增加goal_distance_bias值将会使机器人与全局路径的一致性偏低
+# goal_distance_bias: 10         #(double, default: 24.0) 
+ #The weighting for how much the controller should attempt to avoid obstacles
+ #occdist_scale是机器人尝试躲避障碍物的权重，这个值偏大将导致机器人陷入困境。
+ occdist_scale: 0.01            #(double, default: 0.01) 
+# forward_point_distance:      #(double, default: 0.325)
+ #The amount of time that the robot must stop before a collision in order for a trajectory to be considered valid in seconds 
+# stop_time_buffer:            #(double, default: 0.2)
+ #The absolute value of the velocity at which to start scaling the robot's footprint, in m/s
+# scaling_speed:               #(double, default: 0.25) 
+
+#Oscillation Prevention Parameters
+ oscillation_reset_dist: 0.1    #(double, default: 0.05)
+
+#Global Plan Parameters
+# prune_plan:                 #(bool, default: true)

@@ -1,0 +1,20 @@
+<!--<?xml version="1.0"?>-->
+<launch>
+  <!--xiao:这个不需要吧<master auto="start"/>-->
+  <arg name="map_file"             default="$(find xm_2dnav)/map/helpmecarry.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server"  args="$(arg map_file)" respawn="false" launch-prefix="xterm -e">
+  </node>                                                                            <!--xiao:run your node in a separate xterm window-->
+  <!--因为这个坐标转换已经写在urdf里了，所以不需要了--><!--肖：万恶的老曲和老王把这个从urdf中去掉了，所以，重新加上吧-->
+  <!--<node pkg="tf" type="static_transform_publisher" name="link2_broadcaster" args="-0.127 0 0 0 0 0 base_footprint base_link 50" />-->
+  
+  <!--nav with slam-->
+  <include file="$(find xm_2dnav)/move_base_config/amcl_node.xml"/>
+  
+  <!--nav with fake_slam-->
+  <!--<node pkg="fake_localization" type="fake_localization" name="fake_localization" clear_params="true" output="screen">
+    <remap from="base_pose_ground_truth" to="/mobile_base/mobile_base_controller/odom" />
+    <param name="global_frame_id" value="map" />
+    <param name="base_frame_id" value="base_footprint" />
+  </node>-->
+  <include file="$(find xm_2dnav)/move_base_config/dwa_carrot/move_base.xml"/>
+</launch>

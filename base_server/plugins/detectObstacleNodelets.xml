@@ -1,0 +1,10 @@
+<library path="lib/libdetectObstacle">
+  <class name="base_server/detectObstacle"
+         type="base_server::detectObstacle"
+         base_class_type="nodelet::Nodelet">
+    <description>
+     detect obstacle around xm
+    </description>
+  </class>
+</library>
+

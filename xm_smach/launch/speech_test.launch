@@ -1,0 +1,3 @@
+<launch>
+    <node name = "speech_server" pkg="xm_speech" type="tts_sample" output="screen"/>
+</launch>

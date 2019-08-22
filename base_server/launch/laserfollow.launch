@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+   <node name="laserfollow" pkg="base_server" type="laserCatchPeople">
+   <remap from="followcmd_vel" to="velocity_smoother/raw_cmd_vel"/>
+   </node>
+</launch>
